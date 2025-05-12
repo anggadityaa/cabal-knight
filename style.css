@@ -1,0 +1,100 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    background: url('cabal.jpg') no-repeat center center fixed;
+    background-size: 80%;
+    background-color: #060606ff;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(20, 20, 20, 0.9);
+    padding: 10px 30px;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .navbar a.active {
+    color: gold;
+  }
+  
+  .auth-buttons button {
+    margin-left: 10px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .login-btn {
+    background: linear-gradient(90deg, #ff8800, #cc6600);
+    color: white;
+  }
+  
+  .register-btn {
+    background: linear-gradient(90deg, #cc9933, #ffcc00);
+    color: black;
+  }
+  
+  .hero-section {
+    text-align: center;
+    padding-top: 100px;
+  }
+  
+  .logo-title h1 {
+    
+    /* font-size: 64px;
+    text-shadow: 2px 2px 10px #000;
+    background-image: url(cbal2.png) no-repeat center center fixed;;
+    background-size: contain; */
+  }
+  
+  .logo-title img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .status-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: -80px;
+    gap: 20px;
+  }
+  
+  .status-box {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 5px;
+    border: 2px solid #ff6600;
+    border-radius: 10px;
+    min-width: 180px;
+    text-align: center;
+  }
+  .status-box a {
+    color: gold;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .status-box a:hover {
+    text-decoration: none;
+  }
+  
+  .online {
+    color: lime;
+  }
+  

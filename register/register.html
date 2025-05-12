@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CABALKNIGHT Registration</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>CABALKNIGHT</h1>
+    <form action="register.php" method="POST">
+      <label for="username">Username :</label>
+      <input type="text" id="username" name="username" pattern="[A-Za-z0-9]{4,8}" required placeholder="4 to 8 alpha-numeric characters">
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required placeholder="please use a valid email address">
+
+      <label for="password">Password :</label>
+      <input type="password" id="password" name="password" minlength="4" maxlength="8" required placeholder="4 to 8 characters">
+
+      <button type="submit">SUBMIT</button>
+    </form>
+  </div>
+</body>
+</html>

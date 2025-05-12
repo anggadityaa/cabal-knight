@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cabal Knight</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <ul>
+        <li><a href="#" class="active">HOME</a></li>
+        <li><a href="#">DONATE</a></li>
+        <li><a href="#">DISCORD</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <button class="login-btn">LOGIN</button>
+        <button class="register-btn"><a href="register/register.html" target="_blank" rel="noopener noreferrer">REGISTER</a></button>
+      </div>
+    </nav>
+  </header>
+  <div class="pic">
+    
+  </div>
+
+  <main class="hero-section">
+    <div class="logo-title">
+      <img src="cabal2.png" alt="Cabal Knight Logo" style="max-width: 400px;">
+    </div>
+    
+    <!-- <div class="logo-title">
+      <h1>CABAL KNIGHT</h1>
+    </div> -->
+
+    <div class="status-bar">
+      <div class="status-box download">
+        <a href="https://www.mediafire.com/file/syi17k689lltrbo/CABAL_Online_EP33.7z/file" target="_blank" rel="noopener noreferrer"><p><strong>DOWNLOAD<br>EP 33</strong></p>
+        </a>
+      </div>
+      <!-- <div class="status-box server">
+        <p>Server Time<br><span id="server-time">--:--:--</span><br>Status: <span class="online">Online</span></p>
+      </div>
+      <div class="status-box local">
+        <p>Your Time<br><span id="local-time">--:--:--</span></p>
+      </div> -->
+    </div>
+  </main>
+  <br><br>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('local-time').textContent = now.toLocaleTimeString();
+      document.getElementById('server-time').textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateTime, 1000);
+  </script>
+  
+</body>
+</html>
