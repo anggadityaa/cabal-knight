@@ -1,42 +1,64 @@
-<?php
-$serverName = "your ip";
-$connectionOptions = array(
-    "Database" => "your db",
-    "Uid" => "your username",
-    "PWD" => "your password",
+<?php 
+$serverName = "Your IP server";
+$connectionOptions = [
+    "Database" => "yout database",
+    "Uid" => "your username sql server",
+    "PWD" => "Your password sql server",
     "TrustServerCertificate" => true
-);
+];
 
-// Ambil dari form POST
-$username = htmlspecialchars($_POST['username']);
-$email = htmlspecialchars($_POST['email']);
-$password = $_POST['password'];
+$success = false;
+$errorMessage = "";
 
-if (empty($username) || empty($email) || empty($password)) {
-    echo "Semua field harus diisi.";
-    exit;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = htmlspecialchars($_POST['username'] ?? '');
+    $password = htmlspecialchars($_POST['password'] ?? '');
+    $email    = $_POST['email'] ?? '';
+    
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    if (!empty($username) && !empty($password) && !empty($email)) {
+        $conn = sqlsrv_connect($serverName, $connectionOptions);
+
+        if ($conn) {
+            // check the username is available
+            $checkSql = "SELECT 1 FROM your_table WHERE ID = ?";
+            $checkParams = [$username];
+            $checkStmt = sqlsrv_query($conn, $checkSql, $checkParams);
+
+            if ($checkStmt && sqlsrv_has_rows($checkStmt)) {
+                // username is already in use
+                echo "<script>alert('Username is already in use. Please choose another username.'); window.location.href = 'register.html';</script>";
+                exit;
+            }
+
+            // If there is no duplicate, continue inserting via stored procedure.
+            $sql = "EXEC dbo.cabal_tool_registerAccount ?, ?, ?";
+            $params = [$username, $password, $email];
+            $stmt = sqlsrv_query($conn, $sql, $params);
+
+            if ($stmt !== false) {
+                $success = true;
+                sqlsrv_free_stmt($stmt);
+            } else {
+                $errorMessage = "Registration failed: " . print_r(sqlsrv_errors(), true);
+            }
+
+            sqlsrv_close($conn);
+        } else {
+            $errorMessage = "Connection failed: " . print_r(sqlsrv_errors(), true);
+        }
+    } else {
+        $errorMessage = "All fields are required.";
+    }
+
+    if ($success) {
+        echo "<script>alert('Registration successful!'); window.location.href = 'register.html';</script>";
+        exit;
+    }
+
+    if (!empty($errorMessage)) {
+        echo "<script>alert('" . addslashes($errorMessage) . "'); window.location.href = 'register.html';</script>";
+    }
 }
-
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-// Koneksi ke SQL Server
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-if (!$conn) {
-    die(print_r(sqlsrv_errors(), true));
-}
-
-// Jalankan stored procedure
-$sql = "EXEC dbo.cabal_tool_registerAccount ?, ?, ? GO";
-$params = array($username, $password, $email);
-
-if ($stmt) {
-    echo "<h2>Registrasi berhasil!</h2>";
-    echo "<p>Selamat datang, $username</p>";
-} else {
-    echo "Terjadi kesalahan saat menyimpan data.<br>";
-    die(print_r(sqlsrv_errors(), true));
-}
-
-sqlsrv_free_stmt($stmt);
-sqlsrv_close($conn);
 ?>
